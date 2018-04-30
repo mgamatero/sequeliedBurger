@@ -2,10 +2,17 @@
 var express = require('express')
 var db = require("./models")
 var app = express()
+var bodyparser = require('body-parser')
+var path = require('path')
 var PORT = process.env.PORT || 8080
 
+//middleware
+app.use(bodyparser.urlencoded({ extended: true }))
+app.use(bodyparser.json())
+
 //Routes
-require('./routes/routes.js')(app)
+require('./routes/api-routes.js')(app)
+require('./routes/html-routes.js')(app)
 
 //Sync
 db.sequelize.sync().then(function () {
