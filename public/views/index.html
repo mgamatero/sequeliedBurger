@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +10,69 @@
 
 <!-- complete bootstrap css -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-crossorigin="anonymous">
+    crossorigin="anonymous">
 
- <!-- jquery cdn -->
- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<!-- jquery cdn -->
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 
 
 
 
 <body>
-    
-    <p id = "active">Hello world</p>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="text-center">
+                    <img src="https://cbsnews3.cbsistatic.com/hub/i/r/2018/03/07/481a9418-c3c8-492e-8e92-d1e6ec821075/crop/316x284+89+74/resize/270x/47b7fc47127620982695ad69887be491/sonic-burger.jpg"
+                        alt="Burger">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="text-center">
+                    <p>Burger Name: </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <input type=" text " class="form-control form-rounded " id = "burger-input" placeholder="Text input ">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <button type="button" class="btn btn-primary" id="add-btn">Submit</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5 col-sm-5 col-md-5">
+                <ol class="active">
+
+                </ol>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2">
+            </div>
+            <div class="col-xs-5 col-sm-5 col-md-5" id = "devoured">
+            </div>
+            
+        </div>
+    </div>
 </body>
 
 <script>
-$.get('/api/burgers').then(function (r) {
-    for (var i = 0; i < r.length; i++) {
-      $("#active").append(r[i].name)
-          }
-  })
+    $.get('/api/burgers').then(function (r) {
+        for (var i = 0; i < r.length; i++) {
+            $(".active").append("<li>"+r[i].name+"</li>")
+        }
+    })
+
+    $('#add-btn').on('click',function(){
+        $(".active").append("<li>"+$("#burger-input").val().trim()+"</li>")
+    })
 </script>
+
 </html>
