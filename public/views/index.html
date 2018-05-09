@@ -56,7 +56,10 @@
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2">
             </div>
-            <div class="col-xs-5 col-sm-5 col-md-5" id = "devoured">
+            <div class="col-xs-5 col-sm-5 col-md-5">
+                    <ol class="devoured">
+
+                        </ol>
             </div>
             
         </div>
@@ -64,15 +67,32 @@
 </body>
 
 <script>
+    function renderActiveBurgersToPage(){
     $.get('/api/burgers').then(function (r) {
+        $(".active").empty()
         for (var i = 0; i < r.length; i++) {
-            $(".active").append("<li>"+r[i].name+"</li>")
+            $(".active").append("<class='card card-text' index = "+i+">\
+                                 <div class='card-body'>\
+                                 <li>"+r[i].name+"\
+                                 <button type='button' class='btn btn-danger btn-sm devour-btn'>Devour</button></li></div></div>")
         }
     })
+}
+    //initialize with displaying burgers in table    
+renderActiveBurgersToPage()
 
+    //add burgers to table
     $('#add-btn').on('click',function(){
-        $(".active").append("<li>"+$("#burger-input").val().trim()+"</li>")
-    })
+        $.post('/api/burgers/'+$("#burger-input").val().trim())
+        renderActiveBurgersToPage()  //rerun the display function after adding burger
+     })
+
+     //click event to devour existing burger
+     $('.devour-btn').on('click',function(){
+        $("#devoured").append("<li>+variablehere</li>")
+     })
+        
+     
 </script>
 
 </html>
