@@ -42,7 +42,7 @@
             <div class="col-xs-4 col-sm-4 col-md-4">
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
-                <input type=" text " class="form-control form-rounded " id = "burger-input" placeholder="Text input ">
+                <input type=" text " class="form-control form-rounded " id="burger-input" placeholder="Text input ">
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <button type="button" class="btn btn-primary" id="add-btn">Submit</button>
@@ -57,42 +57,45 @@
             <div class="col-xs-2 col-sm-2 col-md-2">
             </div>
             <div class="col-xs-5 col-sm-5 col-md-5">
-                    <ol class="devoured">
+                <ol class="devoured">
 
-                        </ol>
+                </ol>
             </div>
-            
+
         </div>
     </div>
 </body>
 
 <script>
-    function renderActiveBurgersToPage(){
-    $.get('/api/burgers').then(function (r) {
-        $(".active").empty()
-        for (var i = 0; i < r.length; i++) {
-            $(".active").append("<class='card card-text' index = "+i+">\
+    function renderActiveBurgersToPage() {
+        $.get('/api/burgers').then(function (r) {
+            $(".active").empty()
+            for (var i = 0; i < r.length; i++) {
+                $(".active").append("<class='card card-text' index = " + i + ">\
                                  <div class='card-body'>\
-                                 <li>"+r[i].name+"\
+                                 <li>"+ r[i].name + "\
                                  <button type='button' class='btn btn-danger btn-sm devour-btn'>Devour</button></li></div></div>")
-        }
-    })
-}
+            }
+        })
+    }
     //initialize with displaying burgers in table    
-renderActiveBurgersToPage()
+    renderActiveBurgersToPage()
 
     //add burgers to table
-    $('#add-btn').on('click',function(){
-        $.post('/api/burgers/'+$("#burger-input").val().trim())
+    $('#add-btn').on('click', function () {
+        $.post('/api/burgers/' + $("#burger-input").val().trim())
         renderActiveBurgersToPage()  //rerun the display function after adding burger
-     })
+    })
 
-     //click event to devour existing burger
-     $('.devour-btn').on('click',function(){
-        $("#devoured").append("<li>+variablehere</li>")
-     })
-        
-     
+    //click event to devour existing burger
+
+    //ALERT NOT WORKING RUBBER DUCKY?!?!?!
+    $('.devour-btn').on('click', function () {
+        alert("Devoured")
+        $(".devoured").append("<li>+variablehere</li>")
+    })
+
+
 </script>
 
 </html>
